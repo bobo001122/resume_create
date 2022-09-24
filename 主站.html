@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+    <title>在线个人网站生成</title>
+
+  </head>
+  <style>
+    body{
+      height: 120vh;
+    }
+
+    #tip{
+      color: gold;
+    }
+
+    #div0{
+      background-color:darkblue;
+      width: auto;
+      height: 50px;
+      position: relative;
+      bottom: 15px;
+      right:8px;
+    }
+
+    #div1{
+      background-color: rgb(234, 234, 234);
+      width: 300px;
+      height: auto;
+      position: absolute;
+      left: 300px;
+      top: 145px;
+    }
+
+    #div2{
+      background-color: rgb(200, 200, 200);
+      width: 500px;
+      height: auto;
+      position: absolute;
+      top: 145px;
+      left:600px;
+    }
+
+    #div3{
+      background-color: rgb(119, 61, 255);
+      color: gold;
+      width: 100px;
+      height: 130px;
+      position: -webkit-sticky;
+      position: sticky;
+      top: 145px;
+      left:1100px;  
+    }
+
+    #work{
+      width: 400px;
+      height: 300px;
+      position:relative;
+      left:10px;
+    }
+
+    #experience{
+      width: 400px;
+      height: 300px;
+      position:relative;
+      left:10px;
+    }
+
+    .img{
+      background-color: rgb(255, 255, 255);
+      font-size:larger
+    }
+    /* #show{
+      border: black;
+      width: 30px;
+      height: 30px;
+      position: relative;
+    } */
+  </style>    
+
+  <body>
+    <div id="div0">
+      <p id="tip">一键生成您的个人简历！请完善基本信息。您可以在此页面进行编辑</p>
+    </div>
+
+    <div id="div1">
+      <h1>基本信息</h1>  
+          <button class="show" v-if='!seen' v-on:click="seen=!seen">展开</button>
+          <button class="show" v-if='seen'  v-on:click="seen=!seen">收起</button>
+      <!-- <img id="show" src="./展开按钮.png"> -->
+      <div v-if='seen' id='area'>
+        <br></br>
+        <button onclick="window.location.href = 'https://www.php.cn/'"
+                class="img" 
+                style="width: 80px; height: 80px; border-radius:50%">
+        +</button>
+
+        <h3>姓名</h3>
+        <input type="text">
+
+        <p>联系电话</p>
+        <input type="text">
+
+        <p>联系邮箱</p>
+        <input type="text">
+
+        <br></br>
+        <a >个人网站</a>
+        <br>
+        <input type="text">
+
+        <p>工作地</p>
+        <input type="text">
+
+        <p>职位</p>
+        <input type="text">
+      </div>
+
+      <h1>自我介绍</h1>
+      <input type="text">
+
+      <h1>教育背景</h1>
+      <input type="text">
+        <br></br>
+        <div id="add1"></div>
+        <button onclick="myFunction1()" v-on:click="counter=counter+1">增加内容</button>
+        <button class="delete" v-if='see'  v-on:click="seen=!seen">删除内容</button>
+
+      <h1>个人技能</h1>
+      <input type="text">
+        <br></br>
+        <button>增加内容</button>
+
+      <h1>更多信息</h1>
+      <input type="text">
+        <br></br>
+        <button>增加内容</button>
+
+      <!-- <p>出生年月</p>
+      <input type="text">
+
+      <p>工作年限</p>
+      <input type="text">
+
+      <p>性别</p>
+      <form>
+        <input type="radio" name="sex" value="男">男
+        <input type="radio" name="sex" value="女">女
+      </form>
+
+      <p>身高/体重<p>
+      <input type="text">
+
+      <p>民族</p>
+      <input type="text">
+
+      <p>婚姻状况</p>
+      <input type="text">
+
+      <p>政治面貌</p>
+      <input type="text"> -->
+
+      </input>
+      </div>
+    </div>
+
+    <div id="div2">
+      <h1>工作经历</h1>
+      <input id="work" type="text">
+
+      <h1>项目经历</h1>
+      <input id="experience" type="text">
+    </div>
+
+    <div id="div3">
+      <button class="show" v-if='!seen' v-on:click="seen=!seen">生成预览</button>
+      <br></br>
+      <button class="show" v-if='!seen' v-on:click="seen=!seen">保存简介</button>
+      <br></br>
+      <button class="show" v-if='!seen' v-on:click="seen=!seen">PDF下载</button>
+    </div>
+
+      <script type="text/javascript">
+        const div1 = new Vue({
+            el:'#div1',
+            data:{
+                seen:false
+                // counter:0
+            }
+        })
+    
+      </script>
+
+      <script>
+        function myFunction1(){
+
+          var para=document.createElement("input");
+          var node=document.createTextNode("拜托了爷要过");
+          para.appendChild(node);
+
+          var element=document.getElementById("add1");
+          element.appendChild(para);
+
+
+          var para2=document.createElement("p");
+          var node2=document.createTextNode(" ");
+          para2.appendChild(node2);
+
+          var element2=document.getElementById("add1");
+          element2.appendChild(para2);
+
+        }
+
+      </script>
+    
+
+  </body>
+
+
+</html>
