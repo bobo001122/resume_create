@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+    <title>在线个人网站生成</title>
+
+  </head>
+  <style>
+    body{
+      height: 150vh;
+      background-image:url('./背景.jpg');
+    }
+
+    #tip{
+      color: gold;
+    }
+
+    .txt{
+      position: relative;
+      left: 5px;
+    }
+
+    #main{
+      color: gold;
+    }
+
+    #div1{
+      border:2px;
+      border-radius:15px;
+      background-color: rgb(234, 234, 234);
+      width: 300px;
+      height: auto;
+      position: absolute;
+      left: 300px;
+      top: 145px;
+    }
+
+    #div2{
+      border:2px;
+      border-radius:15px;
+      background-color: rgb(200, 200, 200);
+      width: 500px;
+      height: auto;
+      position: absolute;
+      top: 145px;
+      left:600px;
+    }
+
+    #div3{
+      border:2px;
+      border-radius:15px;
+      background-color: rgb(119, 61, 255);
+      color: gold;
+      width: 100px;
+      height: 130px;
+      position: -webkit-sticky;
+      position: sticky;
+      top: 145px;
+      left:1100px;  
+    }
+
+    #experience{
+      width: 400px;
+      height: 300px;
+      position:relative;
+      left:10px;
+    }
+
+    /* 头像 */
+    .img{
+      background-color: rgb(255, 255, 255);
+      font-size:larger;
+      position: relative;
+      left: 40px;
+    }
+
+    button{
+      position:relative;
+      left: 10px;
+    }
+
+    h1{
+      position:relative;
+      left: 5px;
+    }
+
+    /* 姓名 */
+    h3{          
+      position:relative;
+      left: 60px;
+    }
+
+    p{
+      position:relative;
+      left: 10px;
+    }
+
+    a{
+      position:relative;
+      left: 10px;
+    }
+    
+    input{
+      position:relative;
+      left: 5px;
+    }
+
+    .show{
+      position:relative;
+      top: 5px;
+    }
+
+
+    #tip2{
+      font-size: larger;
+      color: gold;
+      position: fixed;
+      bottom: 0px;
+      left:650px;
+    }
+
+  </style>    
+
+  <body>
+    <!--tby-->
+    <h1>
+        <p id="main" align="center">个人简历生成系统</p>
+    </h1>
+
+    <!-- <div id="div0"> -->
+        <p id="tip" align="center">一键生成您的个人简历！请完善基本信息。您可以在此页面进行编辑</p>
+    <!-- </div> -->
+    <!--tby-->
+
+    <div id="div1">
+      <h1>基本信息</h1>  
+          <button class="show" v-if='!seen' v-on:click="seen=!seen">展开</button>
+          <button class="show" v-if='seen'  v-on:click="seen=!seen">收起</button>
+      <div v-if='seen' id='area'>
+        <br></br>
+        <button onclick="window.location.href = 'https://www.php.cn/'"
+                class="img" 
+                style="width: 80px; height: 80px; border-radius:50%">
+        点击上传头像</button>
+
+        <h3>姓名</h3>
+        <input type="text">
+
+        <br></br>
+        <b>联系电话:</b><input type="text">
+
+        <br></br>
+        <b>联系邮箱:</b><input type="text">
+
+        <br></br>
+        <b>个人网站:</b><input type="text">
+
+        <br></br>
+        <b>工作地点:</b><input type="text">
+
+        <br></br>
+        <b>职位:</b><input type="text">
+
+      </div>
+
+      <h1>自我介绍</h1>
+      <textarea class="txt" rows="7" cols="30" placeholder="对自我状况的概述"></textarea>
+
+      <h1>教育背景</h1>
+      <textarea class="txt" rows="7" cols="30" placeholder="描述您的学历等"></textarea>
+
+      <h1>个人技能</h1>
+      <textarea class="txt" rows="7" cols="30" placeholder="您擅长的领域技能"></textarea>
+
+      </div>
+    </div>
+
+    <div id="div2">
+      <h1>工作经历</h1>
+      <textarea class="txt" rows="10" cols="55" placeholder="描述您的工作经历，例如：所在公司，担任职位，工作描述..."></textarea>
+
+      <h1>项目经历</h1>
+      <textarea class="txt" rows="10" cols="55" placeholder="描述您的项目经历，例如：项目名称，项目时间，项目描述..."></textarea>
+
+      <h1>更多信息</h1>
+      <textarea class="txt" rows="10" cols="55" placeholder="补充更多您认为有助于求职的信息"></textarea>
+        <br></br>
+        <div id="add3"></div>
+        <button onclick="myFunction3()" v-on:click="acounter=acounter+1">增加自定义板块</button>
+
+    </div>
+
+    <div id="div3">
+      <button class="show" v-if='!seen' v-on:click="seen=!seen">生成预览</button>
+      <br></br>
+      <button class="show" v-if='!seen' v-on:click="seen=!seen">保存简介</button>
+      <br></br>
+      <button class="show" v-if='!seen' v-on:click="seen=!seen">PDF下载</button>
+    </div>
+
+      <p id="tip2">祝君在星辰大海中找到自己的光！</p>
+
+      <script type="text/javascript">
+        const div1 = new Vue({
+            el:'#div1',
+            data:{
+                seen:false
+                // counter:0
+            }
+        })
+    
+      </script>
+
+      <script>
+
+        function myFunction3(){
+
+          var bpara=document.createElement("textarea");
+          var bnode=document.createTextNode("");
+          bpara.appendChild(bnode);
+
+          var belement=document.getElementById("add3");
+          belement.appendChild(bpara);
+
+
+          var bpara2=document.createElement("p");
+          var bnode2=document.createTextNode(" ");
+          bpara2.appendChild(bnode2);
+
+          var belement2=document.getElementById("add3");
+          belement2.appendChild(bpara2);
+
+        }
+
+
+      </script>
+    
+
+  </body>
+
+
+</html>
