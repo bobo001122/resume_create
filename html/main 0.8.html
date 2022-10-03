@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+    <title>在线个人简介生成</title>
+
+  </head>
+  <style>
+    body{
+      height: 150vh;
+      background-image:url('./background.jpg');
+    }
+
+    #tip{
+      color: gold;
+    }
+
+    #login{
+      color:white;
+      width: 250px;
+      position: absolute;
+      right: 10px;
+      top: 300px;
+    }
+
+    #side-menu {
+        background-color: lightgrey;
+        display: block;
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        width: 300px;
+        transition: transform 200ms ease-in;
+        transform: translateX(calc(-24px + 100%));
+    }
+
+    #side-menu:hover {
+        transform: translateX(0px);
+    }
+
+    #side-menu-inner {
+        background-image:url('./red.jpg');
+        display: block;
+        height: 100%;
+        width: calc(100%);
+        transform: translateX(24px);
+        background-color: yellow;
+    }
+
+    #right {
+        position: relative;
+        top:10px;
+        left:100px;
+    }
+
+
+    .txt{
+      position: relative;
+      left: 5px;
+    }
+
+    #main{
+      color: gold;
+    }
+
+    #div1{
+      border:2px;
+      border-radius:15px;
+      background-color: rgb(234, 234, 234);
+      width: 300px;
+      height: auto;
+      position: absolute;
+      left: 300px;
+      top: 145px;
+    }
+
+    #div2{
+      border:2px;
+      border-radius:15px;
+      background-color: rgb(200, 200, 200);
+      width: 500px;
+      height: auto;
+      position: absolute;
+      top: 145px;
+      left:600px;
+    }
+
+    #div3{
+      border:2px;
+      border-radius:15px;
+      background-color: rgb(119, 61, 255);
+      color: gold;
+      width: 100px;
+      height: 180px;
+      position: -webkit-sticky;
+      position: sticky;
+      top: 145px;
+      left:1100px;  
+    }
+
+    #experience{
+      width: 400px;
+      height: 300px;
+      position:relative;
+      left:10px;
+    }
+
+    /* 头像 */
+    .img{
+      background-color: rgb(255, 255, 255);
+      font-size:larger;
+      position: relative;
+      left: 40px;
+    }
+
+    button{
+      position:relative;
+      left: 10px;
+    }
+
+    h1{
+      position:relative;
+      left: 5px;
+    }
+
+    /* 姓名 */
+    h3{          
+      position:relative;
+      left: 60px;
+    }
+
+    p{
+      position:relative;
+      left: 10px;
+    }
+
+    b{
+      position:relative;
+      left: 10px;
+    }
+    
+    input{
+      position:relative;
+      left: 12px;
+    }
+
+    .show{
+      position:relative;
+      top: 7px;
+    }
+
+    #special{
+      position:relative;
+      top: 7px;
+      left:12px;
+    }
+
+    #tip2{
+      font-size: larger;
+      color: gold;
+      position: fixed;
+      bottom: 0px;
+      left:650px;
+    }
+
+  </style>    
+
+  <body>
+
+    <!-- 数据传输参考：
+    <form action="result.php" method="post">
+      qq号码: <input type="text" name="username" ><br>
+      qq密码: <input type="text" name="password" ><br>
+    <input type="submit" value="登录">
+    </form> -->
+
+    <!--tby-->
+    <h1>
+        <p id="main" align="center">个人简历生成系统</p>
+    </h1>
+
+    <!-- <div id="div0"> -->
+        <p id="tip" align="center">一键生成您的个人简历！请完善基本信息。您可以在此页面进行编辑</p>
+    <!-- </div> -->
+    <!--tby-->
+
+    <div id="side-menu">
+      <div id="side-menu-inner">
+        <div id="login">
+          <form action="result.php" method="post" >
+            邮箱: <input type="text" name="username" ><br>
+            密码: <input type="text" name="password" ><br>
+          <input id="right" type="submit" value="登录">
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div id="login" onmouseover="bigImg(this)" onmouseout="normalImg(this)">
+      <form action="result.php" method="post" >
+        邮箱: <input type="text" name="username" ><br>
+        密码: <input type="text" name="password" ><br>
+      <input type="submit" value="登录">
+      </form>
+    </div> -->
+
+    <form onsubmit="return func()"  method="post">
+
+      <!-- 传到数据库的假想
+      action="模拟数据传输.txt" -->
+
+    <div id="div1">
+      <h1>基本信息</h1>  
+          <button class="show" v-if='!seen' v-on:click="seen=!seen" type="button">展开</button>
+          <button class="show" v-if='seen'  v-on:click="seen=!seen" type="button">收起</button>
+      <div v-if='seen' id='area'>
+        <br></br>
+
+        <b>点击上传头像</b>
+        <br></br>
+        <form action="demo-form.php">
+          <input type="file" name="pic" accept="image/*" value="点击上传头像">
+          <br></br>
+          <input type="submit">
+        </form>
+        <!-- <button onclick="window.location.href = 'https://www.php.cn/'"
+                class="img" 
+                style="width: 80px; height: 80px; border-radius:50%">
+        点击上传头像</button> -->
+
+        <h3>姓名</h3>
+        <input type="text" id="name">
+
+        <br></br>
+        <b>联系电话:</b><input type="text" id="phone number">
+
+        <br></br>
+        <b>联系邮箱:</b><input type="text" id="mail">
+
+        <br></br>
+        <b>个人网站:</b><input type="text" id="web">
+
+        <br></br>
+        <b>工作地点:</b><input type="text" id="workpalce">
+
+        <br></br>
+        <b>职位:</b><input type="text" id="position">
+      </div>
+
+      <h1>自我介绍</h1>
+      <textarea class="txt" rows="7" cols="30" placeholder="对自我状况的概述" id="self-introduce"></textarea>
+
+      <h1>教育背景</h1>
+      <textarea class="txt" rows="7" cols="30" placeholder="描述您的学历等" id="education"></textarea>
+
+      <h1>个人技能</h1>
+      <textarea class="txt" rows="7" cols="30" placeholder="您擅长的领域技能" id="skill"></textarea>
+
+      </div>
+    </div>
+
+    <div id="div2">
+
+      <h1>工作经历</h1>
+      <textarea class="txt" rows="10" cols="55" placeholder="描述您的工作经历，例如：所在公司，担任职位，工作描述..." id="work exprience"></textarea>
+
+      <h1>项目经历</h1>
+      <textarea class="txt" rows="10" cols="55" placeholder="描述您的项目经历，例如：项目名称，项目时间，项目描述..." id="project experience"></textarea>
+
+      <h1>更多信息</h1>
+      <textarea class="txt" rows="10" cols="55" placeholder="补充更多您认为有助于求职的信息" id="more information"></textarea>
+        
+        <br></br>
+        <div id="add3"></div>
+        <button onclick="myFunction3()" v-on:click="acounter=acounter+1">增加自定义板块</button>
+    </div>
+
+    <div id="div3">
+
+      <input class="show" type="submit" value="保存简介" onclick="SubmitForm()">
+
+      <br></br>
+      <button id="special" type="submit">
+        <!-- 应该更接近为pdf保存？
+        <a href="unix test.pdf">生成预览</a> -->
+        <a href="">生成预览</a>
+      </button>
+
+      <br></br>
+      <input class="show" type="submit" value="PDF下载">
+
+      <br></br>
+      <button class="show" v-on:click="see=!see" type="button">自定义模式</button>
+    </div>
+
+    </form>
+
+      <p id="tip2">祝君在星辰大海中找到自己的光！</p>
+
+      <script type="text/javascript">
+
+        const div1 = new Vue({
+            el:'#div1',
+            data:{
+                seen:false
+                // counter:0
+            }
+        })
+
+        const div3 = new Vue({
+            el:'#div3',
+            data:{
+                see:false
+            }
+        })
+    
+      </script>
+
+      <script>
+
+        function myFunction3(){
+
+          var bpara=document.createElement("textarea");
+          var bnode=document.createTextNode("");
+          bpara.appendChild(bnode);
+
+          var belement=document.getElementById("add3");
+          belement.appendChild(bpara);
+
+
+          var bpara2=document.createElement("p");
+          var bnode2=document.createTextNode(" ");
+          bpara2.appendChild(bnode2);
+
+          var belement2=document.getElementById("add3");
+          belement2.appendChild(bpara2);
+
+        }
+
+        function func(){
+          return false;
+        }
+
+        function SubmitForm() {
+          var input= document.getElementById("name").value;
+          localStorage.setItem("name",input);
+
+          var input= document.getElementById("phone number").value;
+          localStorage.setItem("phone number",input);
+
+          var input= document.getElementById("mail").value;
+          localStorage.setItem("mail",input);
+
+          var input= document.getElementById("web").value;
+          localStorage.setItem("workplace",input);
+
+          var input= document.getElementById("position").value;
+          localStorage.setItem("position",input);
+
+          var input= document.getElementById("self-introduce").value;
+          localStorage.setItem("self-introduce",input);
+
+          var input= document.getElementById("education").value;
+          localStorage.setItem("education",input);
+
+          var input= document.getElementById("skill").value;
+          localStorage.setItem("skill",input);
+
+          var input= document.getElementById("work exprience").value;
+          localStorage.setItem("work exprience",input);
+
+          var input= document.getElementById("project experience").value;
+          localStorage.setItem("project experience",input);
+
+          var input= document.getElementById("more information").value;
+          localStorage.setItem("more information",input);
+
+        }
+
+        function Save(){
+
+        }
+      </script>
+
+      <!-- <script>
+        var seem=false;
+
+        function bigImg(x){
+          seem=true;
+          x.style.visibility="hidden";
+        }
+  
+        function normalImg(x){
+          seem=false;
+          x.style.visibility="visible";
+        }
+      </script> -->
+
+   </form>
+
+  </body>
+
+
+</html>
