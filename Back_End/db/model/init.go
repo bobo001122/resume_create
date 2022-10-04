@@ -6,8 +6,8 @@ import (
 )
 
 func InitModel() {
-	ok := db.DB.AutoMigrate(&User{}, &Class{})
-	if ok != nil {
-		log.Panicln("Database Error: ", ok)
+	err := db.DB.AutoMigrate(&User{}, &ResumeInfo{})
+	if err != nil {
+		log.Panicln("Database Error: ", err)
 	}
 }

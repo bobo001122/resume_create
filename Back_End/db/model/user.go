@@ -4,7 +4,7 @@ import (
 	"Back_End/db"
 )
 
-type User struct {
+type User struct { // need to modify
 	UserID   uint64 `gorm:"primaryKey" json:"user_id"`
 	Name     string `gorm:"not null" json:"name" validate:"required"`
 	Email    string `gorm:"not null" json:"email" validate:"required"`

@@ -27,6 +27,7 @@ func Authorization(c *gin.Context) {
 		utility.Response(http.StatusInternalServerError, "Internal server error", nil, c)
 		log.Println(ok)
 		c.Abort()
+		return
 	}
 	c.Set("user_id", uint64(id_int))
 	c.Next()

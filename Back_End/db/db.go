@@ -27,5 +27,4 @@ func InitDB() {
 	if err != nil {
 		log.Panicln("Database Error: ", err)
 	}
-
 }
